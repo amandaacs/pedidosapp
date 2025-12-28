@@ -8,5 +8,17 @@ export const routes: Routes = [
       loadComponent: () =>
          import('./pages/create-order/create-order')
             .then(m => m.CreateOrder)
+   }, 
+   {
+      path: 'order/:id/payment',
+      loadComponent: () => 
+         import('./pages/payment-form/payment-form')
+            .then(m => m.PaymentForm)
+   },
+   {
+      path: 'order/:id', 
+      loadComponent: () => 
+         import('./pages/order-details/order-details')
+            .then(m => m.OrderDetails)
    }
 ];

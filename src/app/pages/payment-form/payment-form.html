@@ -1,1 +1,39 @@
-<p>payment-form works!</p>
+<div class="p-6 max-w-xl mx-auto">
+
+    <h2 class="text-3xl font-bold mb-6">Registrar Pagamento</h2>
+
+    <mat-card class="p-6">
+
+        <mat-card-content>
+
+            <p class="mb-4 text-gray-700">
+                Pedido: <strong>#{{ orderId }}</strong>
+            </p>
+
+            <mat-form-field appearance="outline" class="w-full mb-4">
+                <mat-label>Método de Pagamento</mat-label>
+                <mat-select [(ngModel)]="method">
+
+                    @for (m of paymentMethods; track m.value) {
+                        <mat-option [value]="m.value">{{ m.label }}</mat-option>
+                    }
+
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full mb-4">
+                <mat-label>Valor (R$)</mat-label>
+                <input matInput type="number" [(ngModel)]="amount" min="0" step="0.01">
+            </mat-form-field>
+
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" class="w-full" (click)="submitPayment()">
+                Registrar Pagamento
+            </button>
+        </mat-card-actions>
+
+    </mat-card>
+
+</div>

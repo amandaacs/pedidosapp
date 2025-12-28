@@ -1,0 +1,53 @@
+<div class="p-6">
+
+    @if (loading) {
+        <p class="text-gray-600 text-lg">Carregando pedido...</p>
+    } @else if (!order) {
+        <p class="text-red-600 text-lg">Pedido não encontrado.</p>
+    } @else {
+        <h2 class="text-3xl font-bold mb-6">Pedido #{{ order.id }}</h2>
+
+        <mat-card class="mb-6 p-4">
+            <mat-card-title>Cliente</mat-card-title>
+            <mat-card-content>
+                <p><strong>ID: </strong>{{ order.customerId }}</p>
+                <p><strong>Nome: </strong>{{ order.customerName }}</p>
+            </mat-card-content>
+        </mat-card>
+        <mat-card class="mb-6 p-4">
+            <mat-card-title>Informações</mat-card-title>
+            <mat-card-content>
+                <p><strong>Status: </strong>{{ order.status }}</p>
+                <p><strong>Criado em: </strong>{{ order.createdAt }}</p>
+            </mat-card-content>
+        </mat-card>
+
+        <h3 class="text-xl font-semibold mb-3">Itens</h3>
+
+        @for (item of order.items; track item.productId) {
+            <mat-card class="mb-4 p-4">
+                <p class="font-semibold">{{ item.productName }}</p>
+                <p>Quantidade: {{ item.quantity }}</p>
+                <p>Preço unitário: R$ {{ item.unitPriceCents/100 }}</p>
+            </mat-card>
+        }
+
+        <h3 class="text-xl font-semibold mt-8 mb-3">Pagamentos</h3>
+
+        @if (order.payments.length === 0) {
+            <p class="text-gray-500">Nenhum pagamento registrado.</p>
+        } @else {
+            @for (pay of order.payments; track pay.id) {
+                <mat-card class="mb-4 p-4">
+                    <p><strong>Método: </strong>{{ pay.method }}</p>
+                    <p><strong>Valor: </strong>{{ pay.amountCents }}</p>
+                    <p><strong>Data: </strong>{{ pay.paidAt }}</p>
+                </mat-card>
+            }
+        }
+
+        <button mat-raised-button color="primary" class="mt-6 w-full" (click)="goToPayment()">Registrar Pagamento</button>
+
+    }
+
+</div>
