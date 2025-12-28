@@ -1,0 +1,35 @@
+<div class="p-6">
+
+    <h2 class="text-3xl font-bold mb-6">Produtos Disponíveis</h2>
+
+    <!-- loading -->
+    @if (loading) {
+        <div class="text-gray-600 text-lg">Carregando produtos...</div>
+    } @else {
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            @for (p of products; track p.id) {
+                <mat-card class="shadow-md hover:shadow-xl transition-shadow">
+                    <mat-card-header>
+                        <mat-card-title class="text-xl font-semibold">
+                            {{ p.name }}
+                        </mat-card-title>
+                        <mat-card-subtitle class="text-sm text-gray-500">
+                            {{ p.category }}
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <p class="text-gray-700 mt-2">
+                            Preço: <span class="font-bold">R$ {{ p.priceCents/100 }}</span>
+                        </p>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-raised-button color="primary" class="w-full">Adicionar ao pedido</button>
+                    </mat-card-actions>
+                </mat-card>
+            }
+
+        </div>
+    }
+
+</div>

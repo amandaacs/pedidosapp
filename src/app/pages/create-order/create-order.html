@@ -1,0 +1,58 @@
+<div class="p-6">
+
+    <h2 class="text-3xl font-bold mb-6">Criar Pedido</h2>
+
+    <h3 class="text-xl font-semibold mb-4">Produtos</h3>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+
+        @for (p of products; track p.id) {
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{ p.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ p.category }}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <p class="text-gray-700 mt-2">
+                        Preço: <strong>R$ {{ p.priceCents / 100 }}</strong>
+                    </p>
+                </mat-card-content>
+
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" class="w-full" (click)="addProduct(p)">Adicionar</button>
+                </mat-card-actions>
+            </mat-card>
+        }
+
+    </div>
+
+    <h3 class="text-xl font-semibold mb-4">Itens Selecionados</h3>
+
+    @if (selectedItems.length === 0) {
+        <p class="text-gray-500">Nenhum produto selecionado.</p>
+    } @else {
+        <div class="space-y-4">
+
+            @for (item of selectedItems; track item.product.id) {
+
+                <mat-card class="p-4 flex justify-between items-center">
+
+                    <div>
+                        <p class="font-semibold">{{ item.product.name }}</p>
+                        <p class="text-gray-600">Qtd: {{ item.quantity }}</p>
+                    </div>
+
+                    <button mat-icon-button color="warn" (click)="removeProduct(item.product.id)">x</button>
+
+                </mat-card>
+
+            }
+
+        </div>
+
+        <button mat-raised-button color="accent" class="mt-6 w-full" (click)="createOrder()">Criar Pedido</button>
+
+    }
+
+</div>
