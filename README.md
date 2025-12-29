@@ -1,59 +1,92 @@
-# PedidosApp
+## Pedidos App – Frontend 
+Interface web desenvolvida em Angular para o gerenciamento de pedidos, produtos e pagamentos. O projeto utiliza Angular Material para componentes de UI e Tailwind CSS para estilização utilitária.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
-## Development server
+## Como executar o projeto
+Pré-requisitos:
 
-To start a local development server, run:
+* Node.js (versão 18 ou superior)
+* Angular CLI
+* Backend em execução: A aplicação frontend espera que o backend esteja rodando em http://localhost:8080.
 
-```bash
-ng serve
-```
+## Passo a passo:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Instalar as dependências:
 
-## Code scaffolding
+* Bash
+> npm install
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Executar o projeto:
 
-```bash
-ng generate component component-name
-```
+* Bash
+> npm start
+* Ou utilize ng serve para o servidor de desenvolvimento.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Acessar a aplicação: 
+* Abra o navegador em 
+> http://localhost:4200.
 
-```bash
-ng generate --help
-```
+## Estrutura principal do projeto
+O código segue uma organização modular baseada em componentes standalone e serviços:
 
-## Building
 
-To build the project run:
 
-```bash
-ng build
-```
+* src/app/pages/ → Componentes de página (Listagem de pedidos, criação, detalhes e pagamentos) .
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+* src/app/services/ → Serviços para comunicação com a API via HttpClient.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+* src/app/models/ → Interfaces TypeScript que definem a estrutura dos dados (Order, Product, Payment).
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+* src/app/layout/ → Estrutura global da aplicação, incluindo a barra lateral (Sidenav) e o cabeçalho .
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+* src/environments/ → Configurações de ambiente, como a URL da API.
+
+## Funcionalidades Principais
+* Listagem de Produtos: Visualização do catálogo de produtos ativos vindos do backend.
+
+
+* Gestão de Pedidos: * Visualização de todos os pedidos realizados.
+
+
+* Criação de novos pedidos com seleção dinâmica de produtos e cálculo de total em tempo real.
+
+
+
+* Consulta detalhada de um pedido específico, exibindo itens e status.
+
+
+* Pagamentos: Registro de novos pagamentos (PIX, Cartão de Crédito, Débito ou Dinheiro) para pedidos existentes.
+
+
+* Cálculo automático de saldo restante na tela de detalhes.
+
+## Tecnologias Utilizadas
+* Angular 18/19: Framework principal (Standalone components).
+
+
+* Angular Material: Componentes de interface como Cards, Forms e Sidenav.
+
+
+
+* Tailwind CSS: Framework de CSS para layout responsivo e espaçamentos.
+
+
+* TypeScript: Tipagem forte para maior segurança no desenvolvimento.
+
+
+
+
+## Observações importantes
+* Responsividade: O layout utiliza mat-sidenav com modo side e classes do Tailwind para se adaptar a diferentes tamanhos de tela.
+
+
+* Comunicação API: Todas as chamadas ao backend são feitas através de serviços injetáveis que utilizam o HttpClient do Angular.
+
+
