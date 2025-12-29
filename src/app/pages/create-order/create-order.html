@@ -51,6 +51,12 @@
 
         </div>
 
+        <mat-card class="p-4 mt-6 bg-gray-50">
+            <p class="text-lg font-semibold">
+                Total do pedido: R$ {{ totalCents / 100 }}
+            </p>
+        </mat-card>
+
         <button mat-raised-button color="accent" class="mt-6 w-full" (click)="createOrder()">Criar Pedido</button>
 
     }

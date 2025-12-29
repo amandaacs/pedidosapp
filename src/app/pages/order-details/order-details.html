@@ -32,6 +32,11 @@
             </mat-card>
         }
 
+        <mat-card class="mt-6 p-4 bg-gray-50">
+            <p><strong>Subtotal dos itens:</strong> R$ {{ itemsTotalCents / 100 }}</p>
+        </mat-card>
+
+
         <h3 class="text-xl font-semibold mt-8 mb-3">Pagamentos</h3>
 
         @if (order.payments.length === 0) {
@@ -43,6 +48,14 @@
                     <p><strong>Valor: </strong>{{ pay.amountCents }}</p>
                     <p><strong>Data: </strong>{{ pay.paidAt }}</p>
                 </mat-card>
+                <mat-card class="mt-4 p-4 bg-gray-50">
+                    <p><strong>Total pago:</strong> R$ {{ paymentsTotalCents / 100 }}</p>
+                    <p>
+                        <strong>Saldo restante:</strong>
+                        R$ {{ (itemsTotalCents - paymentsTotalCents) / 100 }}
+                    </p>
+                </mat-card>
+
             }
         }
 

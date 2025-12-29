@@ -27,23 +27,45 @@ export class OrderDetails implements OnInit{
     private orderService: OrderService
   ){}
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+  this.route.paramMap.subscribe(params => {
+    const id = Number(params.get('id'));
+    this.loading = true;
 
     this.orderService.getOrder(id).subscribe({
-      next: (data) => {
+      next: data => {
         this.order = data;
         this.loading = false;
-      }, 
+      },
       error: () => {
         this.loading = false;
         alert('Erro ao carregar pedido');
       }
     });
-  }
+  });
+}
+
 
   goToPayment(){
     if(!this.order) return;
     this.router.navigate(['/order', this.order.id, 'payment']);
   }
+
+  get itemsTotalCents(): number {
+  if (!this.order) return 0;
+
+  return this.order.items.reduce(
+    (sum, item) => sum + item.quantity * item.unitPriceCents,
+    0
+  );
+}
+
+get paymentsTotalCents(): number {
+  if (!this.order) return 0;
+
+  return this.order.payments.reduce(
+    (sum, pay) => sum + pay.amountCents,
+    0
+  );
+}
 
 }

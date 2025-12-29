@@ -62,6 +62,13 @@ export class CreateOrder implements OnInit{
       this.selectedItems = this.selectedItems.filter(i => i.product.id !== productId);
     }
 
+    get totalCents(): number {
+      return this.selectedItems.reduce(
+        (sum, i) => sum + i.quantity * i.product.priceCents,
+        0
+      );
+}
+
     createOrder(){
       if(this.selectedItems.length === 0){
         alert('Selecione ao menos um produto');

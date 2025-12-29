@@ -4,6 +4,7 @@ import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -20,11 +21,26 @@ export class ProductList implements OnInit{
   products: Product[] = [];
   loading = true;
   
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
 
   ngOnInit(): void {
-     this.productService.listActive().subscribe({
+    this.loadProducts();
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.loadProducts();
+      }
+    });
+  }
+
+  loadProducts(): void {
+    this.loading = true;
+
+    this.productService.listActive().subscribe({
       next: (data) => {
         this.products = data;
         this.loading = false;
@@ -32,7 +48,6 @@ export class ProductList implements OnInit{
       error: () => {
         this.loading = false;
       }
-    }); 
-  }  
-
+    });
+  }
 }
